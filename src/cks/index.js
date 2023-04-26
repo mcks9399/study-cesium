@@ -2,6 +2,7 @@ import * as Cesium from "cesium";
 import "cesium/Build/Cesium/Widgets/widgets.css";
 import "../css/main.css"
 
+
 // Your access token can be found at: https://cesium.com/ion/tokens.
 // This is the default access token
 Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJjMjIwMWIxNC1jMmIwLTRiMzQtOGM1Yy1lYTk0NjI3YWU2M2MiLCJpZCI6MTMxMTY5LCJpYXQiOjE2ODAwODk3MDR9.TyXCi1NlL06VFur74T23Hgnuy7GyzEfCW0B2V2SyNLg';
@@ -10,7 +11,7 @@ const vworld_key = 'E1FA7288-382B-3F1C-928B-71DBD50790B4';
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
 const viewer = new Cesium.Viewer('cesiumContainer',   {
-  timeline  : false, 
+  timeline  : false,
   animation : false,
   selectionIndicator  : false,
   navigationHelpButton  : false,
