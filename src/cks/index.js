@@ -10,7 +10,7 @@ const vworld_key = 'E1FA7288-382B-3F1C-928B-71DBD50790B4';
 
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
 const viewer = new Cesium.Viewer('cesiumContainer',   {
-  timeline  : false,
+  timeline  : false, 
   animation : false,
   selectionIndicator  : false,
   navigationHelpButton  : false,
