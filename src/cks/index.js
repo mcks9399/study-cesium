@@ -9,6 +9,8 @@ Cesium.Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOi
 
 const vworld_key = 'E1FA7288-382B-3F1C-928B-71DBD50790B4';
 
+const domain = `http://localhost:8080`
+
 // Initialize the Cesium Viewer in the HTML element with the `cesiumContainer` ID.
 const viewer = new Cesium.Viewer('cesiumContainer',   {
   timeline  : false,
@@ -43,23 +45,31 @@ SRSNAME=EPSG:4326&
 OUTPUT=application/json&
 EXCEPTIONS=text/xml&
 KEY=${vworld_key}&
-DOMAIN=http://localhost:8080
+DOMAIN=${domain}
 `),{
   stroke : Cesium.Color.WHEAT,
   strokeWidth : 5
 })
+
+
+const sidoWms = new Cesium.UrlTemplateImageryProvider({
+  url : `http://api.vworld.kr/req/wms?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=lt_c_adsido,lt_c_adsigg&STYLES=lt_c_adsido,lt_c_adsigg&CRS=EPSG:4326&BBOX={westDegrees},{southDegrees},{eastDegrees},{northDegrees}&WIDTH=256&HEIGHT=256&FORMAT=image/png&TRANSPARENT=true&BGCOLOR=0xFF0000&EXCEPTIONS=text/xml&KEY=${vworld_key}&DOMAIN=${domain}`
+});
+
+const siggWms = new Cesium.UrlTemplateImageryProvider({
+  url : `http://api.vworld.kr/req/wms?SERVICE=WMS&REQUEST=GetMap&VERSION=1.3.0&LAYERS=lt_c_adsigg,lt_c_adsigg&STYLES=lt_c_adsigg,lt_c_adsigg&CRS=EPSG:4326&BBOX={westDegrees},{southDegrees},{eastDegrees},{northDegrees}&WIDTH=256&HEIGHT=256&FORMAT=image/png&TRANSPARENT=true&BGCOLOR=0xFF0000&EXCEPTIONS=text/xml&KEY=${vworld_key}&DOMAIN=${domain}`
+});
+
+const sidoWmsLayer = new Cesium.ImageryLayer(sidoWms);
+viewer.imageryLayers.add(sidoWmsLayer);
+
+const siggWmsLayer = new Cesium.ImageryLayer(siggWms);
+viewer.imageryLayers.add(siggWmsLayer);
+
+
 
 // 3D 건물레이어
 // viewer.scene.primitives.add(createOsmBuildings());   
 viewer.camera.setView({
   destination: new Cesium.Cartesian3(-3756512.992115552, 5003744.628566555, 4786760.616010258)
   }); 
-
-// // Fly the camera to San Francisco at the given longitude, latitude, and height.
-// viewer.camera.flyTo({
-//   destination : Cartesian3.fromDegrees(-122.4175, 37.655, 400),
-//   orientation : {
-//     heading : Math.toRadians(0.0),
-//     pitch : Math.toRadians(-15.0),
-//   }
-// });
